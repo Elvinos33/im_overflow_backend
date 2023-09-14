@@ -7,7 +7,7 @@ const db = new PrismaClient()
 const app = new Elysia()
     .use(swagger())
     .post(
-        '/sign-up',
+        '/signUp',
         async ({ body }) => db.user.create({
             data: body
         }),
@@ -19,10 +19,27 @@ const app = new Elysia()
                 })
             })
         }
-
+    )
+    .post(
+        '/createPost',
+        async ({ body }) => db.post.create({
+            data: body
+        }),
+        {
+            body: t.Object({
+                title: t.String(),
+                content: t.String(),
+            })
+        }
+    )
+    .get(
+        '/getPosts',
+        async () => db.post.findMany()
     )
     .listen(8000)
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
+
+export type App = typeof app
