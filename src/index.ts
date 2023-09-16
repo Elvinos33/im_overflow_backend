@@ -1,10 +1,12 @@
 import { Elysia, t } from "elysia";
 import { PrismaClient } from '@prisma/client'
 import { swagger } from '@elysiajs/swagger'
+import {cors} from '@elysiajs/cors'
 
 const db = new PrismaClient()
 
 const app = new Elysia()
+    .use(cors())
     .use(swagger())
     .post(
         '/signUp',
