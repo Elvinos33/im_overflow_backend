@@ -36,6 +36,10 @@ const app = new Elysia()
         '/getPosts',
         async () => db.post.findMany()
     )
+    .get(
+        '/getTags',
+        async () => db.tag.findMany()
+    )
     .listen(8000)
 
 console.log(
