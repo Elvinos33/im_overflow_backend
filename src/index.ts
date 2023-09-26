@@ -31,9 +31,24 @@ const app = new Elysia()
             body: t.Object({
                 title: t.String(),
                 content: t.String(),
+                tags: t.Array(
+                    t.String()
+                )
             })
         }
     )
+    .post(
+        '/createTag',
+        async ({ body }) => db.tag.create({
+            data: body
+        }),
+        {
+            body: t.Object({
+                title: t.String(),
+            })
+        }
+    )
+
     .get(
         '/getPosts',
         async () => db.post.findMany()
