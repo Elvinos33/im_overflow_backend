@@ -17,7 +17,7 @@ const app = new Elysia()
             body: t.Object({
                 username: t.String(),
                 password: t.String({
-                    minLength: 8
+                    minLength: 10
                 })
             })
         }
